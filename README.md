@@ -112,6 +112,47 @@ Build fat JAR for server:
 ./gradlew :server-ktor:jar
 ```
 
+## Docker
+
+### Using Pre-built Image
+
+The Docker image is automatically built and pushed to GitHub Container Registry when you create a git tag starting with `v` (e.g., `v1.0.0`).
+
+**Pull the image:**
+```bash
+docker pull ghcr.io/eugene239/ktelemetry/server:latest
+```
+
+Or use a specific version:
+```bash
+docker pull ghcr.io/eugene239/ktelemetry/server:1.0.0
+```
+
+**Run the container:**
+```bash
+docker run -d \
+  -p 8080:8080 \
+  -e HOST=0.0.0.0 \
+  -e PORT=8080 \
+  -e CLICKHOUSE_URL=http://clickhouse:8123 \
+  -e CLICKHOUSE_USER=default \
+  -e CLICKHOUSE_PASSWORD= \
+  --name ktelemetry-server \
+  ghcr.io/eugene239/ktelemetry/server:latest
+```
+
+The image is public, so no authentication is required to pull it.
+
+### Local Development with Docker Compose
+
+Run the complete stack (server + ClickHouse):
+```bash
+cd docker
+docker-compose up -d
+```
+
+The server will be available at `http://localhost:8080` and ClickHouse at `http://localhost:8123`.
+
 ## License
 
 MIT

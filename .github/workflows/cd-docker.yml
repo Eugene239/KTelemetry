@@ -42,11 +42,10 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository_owner }}/ktelemetry/server
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=raw,value=${{ steps.tag.outputs.TAG }}
+            type=raw,value=latest,enable={{is_default_branch}}
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -58,4 +57,19 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      
+      - name: Make package public
+        run: |
+          PACKAGE_NAME="ktelemetry/server"
+          OWNER="${{ github.repository_owner }}"
+          curl -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/orgs/${OWNER}/packages/container/${PACKAGE_NAME}" \
+            -d '{"visibility":"public"}' || \
+          curl -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/user/packages/container/${PACKAGE_NAME}" \
+            -d '{"visibility":"public"}'
 
