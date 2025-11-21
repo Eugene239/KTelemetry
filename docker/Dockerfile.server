@@ -7,7 +7,7 @@ COPY gradle ./gradle
 COPY core-model ./core-model
 COPY server-ktor ./server-ktor
 
-RUN ./gradlew :server-ktor:fatJar --no-daemon -x test
+RUN gradle :server-ktor:fatJar --no-daemon -x test
 
 FROM eclipse-temurin:17-jre-alpine
 
