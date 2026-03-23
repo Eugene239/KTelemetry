@@ -1,16 +1,17 @@
 <configuration>
+    <variable name="LOG_LEVEL" value="${LOG_LEVEL:-INFO}" />
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <root level="INFO">
+    <root level="${LOG_LEVEL}">
         <appender-ref ref="STDOUT" />
     </root>
 
-    <logger name="io.ktelemetry" level="DEBUG" />
-    <logger name="io.ktelemetry.server" level="DEBUG" />
-    <logger name="io.ktor" level="INFO" />
+    <logger name="io.epavlov.ktelemetry" level="${LOG_LEVEL}" />
+    <logger name="io.ktor" level="WARN" />
 </configuration>
 

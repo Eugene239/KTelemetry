@@ -1,14 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">KTelemetry Demo</string>
-    <string name="send_info_event">Send INFO Event</string>
-    <string name="send_debug_event">Send DEBUG Event</string>
-    <string name="send_warn_event">Send WARN Event</string>
-    <string name="send_error_event">Send ERROR Event</string>
-    <string name="send_custom_event">Send Custom Event</string>
-    <string name="trigger_crash">Trigger Crash</string>
-    <string name="flush_events">Flush Events</string>
-    <string name="event_sent">Event sent!</string>
-    <string name="events_flushed">Events flushed!</string>
 </resources>
-

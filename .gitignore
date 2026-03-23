@@ -43,4 +43,11 @@ local.properties
 
 # Docker
 docker-compose.override.yml
+docker/.env
+
+# Temp / scratch
+temp/
+
+# Kotlin
+.kotlin/
 

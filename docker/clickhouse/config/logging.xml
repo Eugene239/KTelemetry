@@ -1,0 +1,71 @@
+<clickhouse>
+    <logger>
+        <level>warning</level>
+        <log>/var/log/clickhouse-server/clickhouse-server.log</log>
+        <errorlog>/var/log/clickhouse-server/clickhouse-server.err.log</errorlog>
+        <size>50M</size>
+        <count>3</count>
+    </logger>
+
+    <query_log>
+        <database>system</database>
+        <table>query_log</table>
+        <partition_by>toYYYYMM(event_date)</partition_by>
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+        <ttl>event_date + INTERVAL 7 DAY</ttl>
+    </query_log>
+
+    <query_thread_log>
+        <database>system</database>
+        <table>query_thread_log</table>
+        <partition_by>toYYYYMM(event_date)</partition_by>
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+        <ttl>event_date + INTERVAL 7 DAY</ttl>
+    </query_thread_log>
+
+    <trace_log>
+        <database>system</database>
+        <table>trace_log</table>
+        <partition_by>toYYYYMM(event_date)</partition_by>
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+        <ttl>event_date + INTERVAL 3 DAY</ttl>
+    </trace_log>
+
+    <metric_log>
+        <database>system</database>
+        <table>metric_log</table>
+        <flush_interval_milliseconds>30000</flush_interval_milliseconds>
+        <collect_interval_milliseconds>10000</collect_interval_milliseconds>
+        <ttl>event_date + INTERVAL 7 DAY</ttl>
+    </metric_log>
+
+    <asynchronous_metric_log>
+        <database>system</database>
+        <table>asynchronous_metric_log</table>
+        <flush_interval_milliseconds>30000</flush_interval_milliseconds>
+        <ttl>event_date + INTERVAL 3 DAY</ttl>
+    </asynchronous_metric_log>
+
+    <part_log>
+        <database>system</database>
+        <table>part_log</table>
+        <partition_by>toYYYYMM(event_date)</partition_by>
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+        <ttl>event_date + INTERVAL 7 DAY</ttl>
+    </part_log>
+
+    <text_log>
+        <database>system</database>
+        <table>text_log</table>
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+        <level>warning</level>
+        <ttl>event_date + INTERVAL 3 DAY</ttl>
+    </text_log>
+
+    <opentelemetry_span_log remove="1" />
+    <session_log remove="1" />
+    <processors_profile_log remove="1" />
+    <asynchronous_insert_log remove="1" />
+    <backup_log remove="1" />
+    <s3_queue_log remove="1" />
+</clickhouse>

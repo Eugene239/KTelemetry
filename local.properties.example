@@ -1,0 +1,22 @@
+# ── Server (server-ktor) ─────────────────────────────────
+# host and port default to 0.0.0.0 / 8080 if omitted
+#host=0.0.0.0
+#port=8080
+
+# ClickHouse connection — only clickhouse.url is required
+clickhouse.url=http://localhost:8123
+clickhouse.user=default
+clickhouse.password=
+# Optional API key for /telemetry/events protection
+#telemetry.apiKey=change-me
+
+# To connect to a remote ClickHouse (e.g. deployed on Coolify):
+#clickhouse.url=https://play.ktelemetry.online
+#clickhouse.user=telemetry
+#clickhouse.password=<your-password>
+
+# ── Android demo app ────────────────────────────────────
+# Server URL for the demo app to send events to
+#backend.url=http://10.0.2.2:8080
+# Optional API key header value for demo app
+#backend.apiKey=change-me

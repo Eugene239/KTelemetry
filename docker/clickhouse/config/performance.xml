@@ -1,0 +1,14 @@
+<clickhouse>
+    <max_server_memory_usage_to_ram_ratio>0.75</max_server_memory_usage_to_ram_ratio>
+
+    <merge_tree>
+        <max_bytes_to_merge_at_max_space_in_pool>1073741824</max_bytes_to_merge_at_max_space_in_pool>
+        <number_of_free_entries_in_pool_to_execute_mutation>5</number_of_free_entries_in_pool_to_execute_mutation>
+    </merge_tree>
+
+    <max_concurrent_queries>50</max_concurrent_queries>
+    <max_connections>200</max_connections>
+
+    <mark_cache_size>1073741824</mark_cache_size>
+    <uncompressed_cache_size>536870912</uncompressed_cache_size>
+</clickhouse>
