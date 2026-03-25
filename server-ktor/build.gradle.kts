@@ -70,6 +70,9 @@ dependencies {
 
     implementation(serverLibs.logback.classic)
     implementation(libs.kotlinx.serialization.json)
+    implementation(serverLibs.clickhouse.client.v2)
+
+    testImplementation(kotlin("test"))
 }
 
 tasks.register<Jar>("fatJar") {

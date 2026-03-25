@@ -91,8 +91,8 @@ internal object EventJsonConverter {
             putOpt("breadcrumbType", ctx.breadcrumbType)
             putOpt("durationMs", ctx.durationMs)
             if (ctx.tags.isNotEmpty()) put("tags", JSONArray(ctx.tags))
-            if (ctx.featureFlags != null) put("featureFlags", JSONObject(ctx.featureFlags!!))
-            if (ctx.payload != null) put("payload", JSONObject(ctx.payload!!))
+            ctx.featureFlags?.let { put("featureFlags", JSONObject(it)) }
+            ctx.payload?.let { put("payload", JSONObject(it)) }
         }
 
     private fun toJsonObject(error: ErrorInfo): JSONObject =

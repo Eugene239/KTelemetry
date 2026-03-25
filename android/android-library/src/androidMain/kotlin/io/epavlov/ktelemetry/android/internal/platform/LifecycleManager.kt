@@ -57,11 +57,12 @@ private class ActivityTracker : Application.ActivityLifecycleCallbacks {
 
     override fun onActivityResumed(activity: Activity) {
         val previousScreen = currentScreen
-        currentScreen = activity.javaClass.simpleName
+        val screenName = activity.javaClass.simpleName
+        currentScreen = screenName
         screenStartTime = System.currentTimeMillis()
 
         KTelemetry.track(
-            eventName = currentScreen!!,
+            eventName = screenName,
             eventType = TelemetryEventType.SCREEN_VIEW,
             context =
                 EventContext(

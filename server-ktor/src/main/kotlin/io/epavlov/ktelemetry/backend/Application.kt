@@ -1,6 +1,7 @@
 package io.epavlov.ktelemetry.backend
 
 import io.epavlov.ktelemetry.backend.config.ConfigLoader
+import io.epavlov.ktelemetry.backend.repository.ClickHouseClientTelemetryRepository
 import io.epavlov.ktelemetry.backend.repository.TelemetryRepository
 import io.epavlov.ktelemetry.backend.routes.telemetryRoutes
 import io.ktor.serialization.kotlinx.json.json
@@ -30,13 +31,14 @@ fun main() {
     val clickHousePassword = ConfigLoader.getProperty(props, "clickhouse.password", "CLICKHOUSE_PASSWORD", "")
     val telemetryApiKey = ConfigLoader.getProperty(props, "telemetry.apiKey", "TELEMETRY_API_KEY", "")
 
+    val apiKeyAuth = if (telemetryApiKey.isBlank()) "disabled" else "enabled"
     logger.info(
-        "Starting KTelemetry server v${BuildInfo.version}, ClickHouse: $clickHouseUrl, API key auth: ${if (telemetryApiKey.isBlank()) "disabled" else "enabled"}",
+        "Starting KTelemetry server v${BuildInfo.version}, ClickHouse: $clickHouseUrl, API key auth: $apiKeyAuth",
     )
 
-    val telemetryRepository =
-        TelemetryRepository(
-            url = clickHouseUrl,
+    val telemetryRepository: TelemetryRepository =
+        ClickHouseClientTelemetryRepository(
+            endpoint = clickHouseUrl.trimEnd('/'),
             user = clickHouseUser,
             password = clickHousePassword,
         )
