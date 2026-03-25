@@ -21,6 +21,8 @@ rootProject.name = "KTelemetry"
 
 include("core-model")
 include("server-ktor")
-include("android:android-library")
-include("android:android-demo-app")
+if (file("android/android-library").exists()) {
+    include("android:android-library")
+    include("android:android-demo-app")
+}
 
